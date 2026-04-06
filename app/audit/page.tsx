@@ -15,9 +15,9 @@ export default function Home() {
               <span className="text-xl font-bold text-slate-900">BenefAI</span>
             </div>
             <div className="flex items-center gap-4">
-              <a href="https://benefai-dashboard.vercel.app" target="_blank" className="text-sm font-medium text-slate-600 hover:text-slate-900">AI Features</a>
+              <a href="https://benefai-dashboard.vercel.app" target="_blank" className="text-sm font-medium text-slate-600 hover:text-slate-900">Dashboard</a>
               <a href="/audit" className="text-sm font-medium text-slate-600 hover:text-slate-900">Audit Log</a>
-              <a href="/dashboard" className="text-sm font-medium text-slate-600 hover:text-slate-900">Dashboard</a>
+              <a href="/dashboard" className="text-sm font-medium text-slate-600 hover:text-slate-900">Analytics</a>
             </div>
           </div>
         </div>
