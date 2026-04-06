@@ -15,7 +15,7 @@ export default function Home() {
               <span className="text-xl font-bold text-slate-900">BenefAI</span>
             </div>
             <div className="flex items-center gap-4">
-              <a href="https://benefai-dashboard.vercel.app" target="_blank" className="text-sm font-medium text-slate-600 hover:text-slate-900">Dashboard</a>
+              <a href="https://fraud-dashboard-green.vercel.app/" target="_blank" className="text-sm font-medium text-slate-600 hover:text-slate-900">Dashboard</a>
               <a href="https://benefai.vercel.app" target="_blank" className="text-sm font-medium text-slate-600 hover:text-slate-900">Verification</a>
               <a href="https://benefai-legal-intelligence-mgln-dprw767no.vercel.app/p3test" target="_blank" className="text-sm font-medium text-slate-600 hover:text-slate-900">Legal Intelligence</a>
               <a href="https://benefd.vercel.app/" target="_blank" className="text-sm font-medium text-slate-600 hover:text-slate-900">BenefD</a>
@@ -33,6 +33,14 @@ export default function Home() {
           <IntakeForm />
         </div>
       </main>
+
+      {/* Bottom Next Button */}
+      <div className="fixed bottom-6 right-6">
+        <a href="https://benefai-legal-intelligence-mgln-dprw767no.vercel.app/p3test" target="_blank" className="flex items-center gap-2 bg-blue-900 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-800 font-medium">
+          Next Feature →
+        </a>
+      </div>
+
     </div>
   )
 }
