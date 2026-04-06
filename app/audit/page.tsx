@@ -1,77 +1,37 @@
-'use client'
+import IntakeForm from '@/components/IntakeForm'
 
-import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase'
-
-export default function AuditPage() {
-  const [logs, setLogs] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchLogs = async () => {
-      const { data } = await supabase
-        .from('audit_logs')
-        .select('*')
-        .order('created_at', { ascending: false })
-      setLogs(data || [])
-      setLoading(false)
-    }
-    fetchLogs()
-  }, [])
-
+export default function Home() {
   return (
-    <main className="max-w-5xl mx-auto p-8">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-medium">Audit Trail</h1>
-          <p className="text-gray-500 text-sm mt-1">Every verification logged and timestamped</p>
+    <div className="min-h-screen bg-slate-50">
+      <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-blue-900 rounded-lg flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <span className="text-xl font-bold text-slate-900">BenefAI</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <a href="https://benefai-dashboard.vercel.app" target="_blank" className="text-sm font-medium text-slate-600 hover:text-slate-900">AI Features</a>
+              <a href="/audit" className="text-sm font-medium text-slate-600 hover:text-slate-900">Audit Log</a>
+              <a href="/dashboard" className="text-sm font-medium text-slate-600 hover:text-slate-900">Dashboard</a>
+            </div>
+          </div>
         </div>
-        <div className="flex gap-3">
-          <a href="/" className="px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">← Verify</a>
-          <a href="/dashboard" className="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-700">Dashboard →</a>
-        </div>
-      </div>
+      </nav>
 
-      {loading ? (
-        <p className="text-gray-400 text-sm">Loading...</p>
-      ) : logs.length === 0 ? (
-        <p className="text-gray-400 text-sm">No verifications yet.</p>
-      ) : (
-        <div className="border border-gray-200 rounded-lg overflow-hidden">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b border-gray-200">
-              <tr>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">Time</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">Applicant</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">Decision</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">Score</th>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">Reason</th>
-              </tr>
-            </thead>
-            <tbody>
-              {logs.map((log, i) => (
-                <tr key={log.id} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="px-4 py-3 text-gray-400 whitespace-nowrap">
-                    {new Date(log.created_at).toLocaleString()}
-                  </td>
-                  <td className="px-4 py-3 font-medium">{log.applicant_name}</td>
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      log.decision === 'approved' ? 'bg-green-100 text-green-700' :
-                      log.decision === 'review' ? 'bg-yellow-100 text-yellow-700' :
-                      'bg-red-100 text-red-700'
-                    }`}>
-                      {log.decision}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3">{log.fraud_score}/100</td>
-                  <td className="px-4 py-3 text-gray-500">{log.reason}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <main className="max-w-2xl mx-auto px-4 py-12">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-slate-900">Beneficiary Verification</h1>
+          <p className="text-slate-500 mt-2 text-sm">Submit applicant details for AI-powered fraud detection and eligibility check</p>
         </div>
-      )}
-    </main>
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
+          <IntakeForm />
+        </div>
+      </main>
+    </div>
   )
 }
